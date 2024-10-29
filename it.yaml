@@ -1,0 +1,44 @@
+-> Copy the bucket name (e-commerce-react-181d5.appspot.com)
+-> Install two packages
+--> npm i firebase-admin
+--> npm i multer-firebase-storage
+
+-> 1st Step: Create a file "./config/firebase.config.js":
+--> Initialize the firebase
+--> Add the storageBucket name
+
+const fbAdmin = require("firebase-admin");
+const firebaseCredentials = require("../e-commerce-react-181d5-firebase-adminsdk-l1z1w-c3ff0eb38f.json");
+
+fbAdmin.initializeApp({
+  credential: fbAdmin.credential.cert(firebaseCredentials),
+  storageBucket: "e-commerce-react-181d5.appspot.com",
+});
+
+module.exports = fbAdmin;
+
+
+-> 2nd Step: Create a file "./config/multer.config.js":
+--> Setup the multer
+--> Setup the firebase storage
+--> Setup the multer-firebase-storage
+--> Setup the unique and public
+
+const multer = require("multer");
+const FirebaseStorage = require("multer-firebase-storage");
+const firebaseCredentials = require("./e-commerce-react-181d5-firebase-adminsdk-l1z1w-c3ff0eb38f.json");
+const fbAdmin = require("./firebase.config");
+
+const storage = FirebaseStorage({
+  bucketName: "e-commerce-react-181d5.appspot.com",
+  credentials: fbAdmin.credential.cert(firebaseCredentials),
+  unique: true,
+  public: true,
+});
+
+const upload = multer({
+  storage: storage,
+});
+
+module.exports = upload;
+
