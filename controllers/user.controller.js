@@ -38,9 +38,7 @@ module.exports.signup = async (req, res, next) => {
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    return res
-      .status(201)
-      .json({ message: "User created successfully", user, token });
+    res.status(201).json({ message: "User created successfully", user, token });
   } catch (error) {
     next(error);
   }
@@ -63,7 +61,7 @@ module.exports.signin = async (req, res, next) => {
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    return res
+    res
       .status(200)
       .json({ message: "User signed in successfully", user, token });
   } catch (error) {
@@ -82,7 +80,7 @@ module.exports.logout = async (req, res, next) => {
       return res.status(400).json({ message: "Token is already blacklisted" });
     }
     await blacklistModel.create({ token });
-    return res.status(200).json({ message: "User logged out successfully" });
+    res.status(200).json({ message: "User logged out successfully" });
   } catch (error) {
     next(error);
   }
@@ -91,7 +89,7 @@ module.exports.logout = async (req, res, next) => {
 module.exports.getProfile = async (req, res, next) => {
   try {
     const user = await userModel.findById(req.user._id);
-    return res.status(200).json({ message: "User fetched successfully", user });
+    res.status(200).json({ message: "User fetched successfully", user });
   } catch (error) {
     next(error);
   }
