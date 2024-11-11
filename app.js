@@ -8,7 +8,7 @@ const connectDB = require("./config/mongodb");
 const indexRoutes = require("./routes/index.routes");
 const userRoutes = require("./routes/user.routes");
 const productRoutes = require("./routes/product.routes");
-connectDB();
+// connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
