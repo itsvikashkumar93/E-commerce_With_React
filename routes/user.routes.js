@@ -26,7 +26,7 @@ router.get(
   authMiddleware.isAuthenticated,
   userController.createOrder
 );
-router.get(
+router.post(
   "/verify/:id",
   authMiddleware.isAuthenticated,
   userController.verifyPayment

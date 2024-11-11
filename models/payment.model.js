@@ -8,11 +8,11 @@ const paymentSchema = mongoose.Schema(
     },
     paymentId: {
       type: String,
-      required: true,
+      // required: true,
     },
     signature: {
       type: String,
-      required: true,
+      // required: true,
     },
     amount: {
       type: Number,
